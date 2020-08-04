@@ -1,0 +1,39 @@
+#parent{
+    position: relative;
+    background-color: white;
+    margin-top: 150px;
+}
+
+.door{
+    
+   position:absolute;
+    z-index: 1;
+}
+
+.camera{
+     position :absolute;
+    top: 60px;
+    left: 110px;
+    z-index: 2;
+}
+
+
+.lock{
+    position :absolute;
+    top: 357px;
+    left: 270px;
+    z-index:3;
+}
+
+.motion{
+    position :absolute;
+    top: 570px;
+    left: 310px;
+    z-index:3;
+}
+
+.footer{
+    position :absolute;
+    top: 780px;
+    left: 580px;
+}

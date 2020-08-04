@@ -1,0 +1,52 @@
+
+<head>
+</head>
+<body>
+
+	View Count: <strong id="viewCount"> 0 </strong>
+	Time: <strong id="time"> 0 </strong>
+	Image:  <strong id="image"> 0 </strong> 
+	Message: <strong id="message"> 0 </strong>
+	<a href="unread_notifs.php">View all</a>
+	
+<script>
+
+ function liveDataUpdate () {
+	
+	const textViewCount = document.getElementById('viewCount');
+	const time = document.getElementById('time');
+	const image = document.getElementById('image');
+	const message = document.getElementById('message');
+	
+	setInterval(function () {
+		
+		fetch("notifs.php").then(function(response){
+			return response.json();
+		}).then(function(data){
+			
+			textViewCount.textContent = data.viewCount;
+			time.textContent = data.time;
+			image.innerHTML = data.img;
+			message.textContent = data.message;
+		
+						
+
+		}).catch(function(error){
+			console.log(error);
+		})
+		
+	}, 1000);
+	
+	
+}
+	
+	
+document.addEventListener("DOMContentLoaded", function(){
+	liveDataUpdate();
+});
+	
+
+</script>
+
+</body>
+	
