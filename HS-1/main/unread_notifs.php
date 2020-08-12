@@ -4,6 +4,12 @@ header("Location: /HS-1/HS-1/index.php");
 }
  ?> 
 
+<style>
+img:hover {
+  width: 300px;
+  height: 300px;
+}
+</style>
 
 <?php
 include "addons/db_conn.php";

@@ -67,7 +67,7 @@ include "addons/nav.php";
                     
                     <small>    
                         <p class="lead">
-                    Email: <strong id="e"><?php echo  $user_email ?><br></strong>                 <!--dynamically member username -->
+                    Email: <a href="mailto:<?php echo $user_email ?>" id="e"><?php echo $user_email ?></a> <br>                 <!--dynamically member username -->
                         </p>    
                     </small>
                     

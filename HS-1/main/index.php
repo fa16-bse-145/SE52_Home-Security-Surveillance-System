@@ -49,27 +49,16 @@ include "addons/nav.php";
    
     <div class = "camera">
          <img src="images/cam_bg.png" alt="" width="90px" height="90px" id="camera">
-        <?php
-
-        $query_camera = "SELECT * from camera";
-
-        $result = mysqli_query($connection, $query_camera);
-
-        while($row = mysqli_fetch_assoc($result)) {
-                    
-            $status   = $row['status'];
-            $time     = $row['Time'];
-
-?>
+    
          <br>
-        <p id="camera_p">Last Active:<?php echo $time ?>
+        <p id="camera_p">Last Active
           </p>  
 
        
-        <p id="camCount">Status<?php echo $status ?>
+        <p id="camCount">Status
                     </p>  
  
-    <?php } ?>
+  
     </div> 
     
     
@@ -77,50 +66,28 @@ include "addons/nav.php";
         
         <img src="images/door_lock.png" alt="" width="70px" height="70px" id="lock">
         
-        <?php
-
-        $query_lock = "SELECT * from DoorLock";
-
-        $result = mysqli_query($connection, $query_lock);
-
-        while($row = mysqli_fetch_assoc($result)) {
-                    
-            $status   = $row['status'];
-            $time     = $row['Time'];
-
-?>
+ 
        <br>
-        <p id="lock_p">Last Active:<?php echo $time ?>
+        <p id="lock_p">Last Active
           </p>  
 
        
-        <p id="doorCount">Status<?php echo $status ?>
-                    </p>     <?php } ?>
+        <p id="doorCount">Status
+                    </p>    
     </div>        
     
        
     <div class = "motion">
          <img src="images/foot_bg.png" alt="" id="motion">   
          
-         <?php
-
-        $query_sensor = "SELECT * from PIRSensor";
-
-        $result = mysqli_query($connection, $query_sensor);
-
-        while($row = mysqli_fetch_assoc($result)) {
-                    
-            $status   = $row['status'];
-            $time     = $row['Time'];
-
-?><br>
-        <p id="motion_p">Last Active:<?php echo $time ?>
+   <br>
+        <p id="motion_p">Last Active
           </p>  
 
        
-        <p id="viewCount">Status<?php echo $status ?>
+        <p id="viewCount">Status
                     </p>  
-    <?php } ?> 
+    
     </div> 
          
      
@@ -296,12 +263,39 @@ function liveRequestUpdate () {
 	
 }
 	
+function liveLastUpdate () {
+	
+	const camera = document.getElementById('camera_p');
+	const lock = document.getElementById('motion_p');
+	const motion = document.getElementById('lock_p');
+
+	
+	setInterval(function () {
+		
+		fetch("lastActive.php").then(function(response){
+			return response.json();
+		}).then(function(data){
+			
+			camera.innerHTML = data.camera;
+			lock.innerHTML =  data.lock;
+			motion.textContent = data.motion;
+						
+		}).catch(function(error){
+			console.log(error);
+		})
+		
+	}, 1000);
+	
+	
+}
+	
 document.addEventListener("DOMContentLoaded", function(){
 	liveDataUpdate();
 	liveCamDataUpdate();
 	liveLockDataUpdate();
 	liveNotifUpdate();
 	liveRequestUpdate();
+	liveLastUpdate();
 });
 	
 
